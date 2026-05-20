@@ -39,6 +39,16 @@
   color: white;
 }
 
+.toggle-btn:disabled {
+  cursor: not-allowed;
+}
+
+.checkbox.disabled {
+  border-color: var(--border-hover);
+  background: rgba(148, 163, 184, 0.15);
+  opacity: 0.5;
+}
+
 .task-content {
   flex: 1;
   min-width: 0;

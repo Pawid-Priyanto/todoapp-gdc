@@ -11,8 +11,9 @@ interface TaskItemProps {
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
-  const { toggleTask, deleteTask } = useTasks();
+  const { toggleTask, deleteTask, filter } = useTasks();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isToggleDisabled = filter === 'pending';
 
   return (
     <>
@@ -26,9 +27,10 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
         <button 
           className="toggle-btn" 
           onClick={() => toggleTask(task.id)}
+          disabled={isToggleDisabled}
           aria-label={task.completed ? "Mark as pending" : "Mark as completed"}
         >
-          <div className={`checkbox ${task.completed ? 'checked' : ''}`}>
+          <div className={`checkbox ${task.completed ? 'checked' : ''} ${isToggleDisabled ? 'disabled' : ''}`}>
             {task.completed && <CheckCircle size={16} />}
           </div>
         </button>

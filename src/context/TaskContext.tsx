@@ -46,6 +46,10 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const taskToToggle = tasks.find((t) => t.id === id);
     if (!taskToToggle) return;
 
+    if (filter === 'pending' && !taskToToggle.completed) {
+      return;
+    }
+
     try {
       // Optimistic Update
       const originalTasks = [...tasks];
