@@ -49,3 +49,32 @@ jobs:
         context: .
         file: ./Dockerfile
         push: false # Kita set false dulu karena kita belum koneksikan ke Cloud Storage/Registry beneran
+
+  # JOB KETIGA: Otomatis Rilis ke Vercel (Hanya jalan kalau JOB PERTAMA & KEDUA sukses)
+  deploy-to-vercel:
+    needs: [validation-and-testing, docker-build-simulation]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Ambil Kode dari GitHub
+      uses: actions/checkout@v4
+
+    - name: Install Vercel CLI
+      run: npm install --global vercel
+
+    - name: Tarik Informasi Environment Vercel
+      run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      env:
+        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+    - name: Build Aset Production di Vercel
+      run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      env:
+        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+    - name: Deploy Hasil Build ke Vercel Live Production
+      run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+      env:
+        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
