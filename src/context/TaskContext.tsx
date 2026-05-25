@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import type { Task, FilterType, TaskContextType } from '../types';
+import React, { useState, useEffect, useCallback } from 'react';
+import type { Task, FilterType } from '../types';
 import * as api from '../services/api';
 
-const TaskContext = createContext<TaskContextType | undefined>(undefined);
+import { TaskContext } from './TaskContextCore';
 
 export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -25,6 +25,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     refreshTasks();
   }, [refreshTasks]);
 
@@ -108,10 +109,4 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
   );
 };
 
-export const useTasks = () => {
-  const context = useContext(TaskContext);
-  if (context === undefined) {
-    throw new Error('useTasks must be used within a TaskProvider');
-  }
-  return context;
-};
+

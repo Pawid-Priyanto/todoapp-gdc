@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useTasks } from '../context/TaskContext';
+import { useTasks } from '../context/useTask';
 import TaskItem from './TaskItem';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ClipboardList, Loader2, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -19,6 +19,7 @@ const TaskList: React.FC = () => {
 
   // Reset to page 1 when filter changes
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurrentPage(1);
   }, [filter]);
 
