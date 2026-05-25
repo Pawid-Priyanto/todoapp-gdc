@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import TaskItem from '../components/TaskItem';
-import { useTasks } from '../context/TaskContext';
+import { useTasks } from '../context/useTask';
 
-vi.mock('../context/TaskContext', () => ({
+vi.mock('../context/useTask', () => ({
   useTasks: vi.fn(),
 }));
 

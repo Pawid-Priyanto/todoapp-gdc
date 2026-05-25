@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Task } from '../types';
-import { useTasks } from '../context/TaskContext';
+import { useTasks } from '../context/useTask';
 import { Trash2, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ConfirmModal from './ConfirmModal';

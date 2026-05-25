@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTasks } from '../context/TaskContext';
+import { useTasks } from '../context/useTask';
 import type { FilterType } from '../types';
 import './FilterBar.css';
 

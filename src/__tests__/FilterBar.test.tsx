@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import FilterBar from '../components/FilterBar';
-import { TaskProvider, useTasks } from '../context/TaskContext';
+import { TaskProvider } from '../context/TaskContext';
+import {  useTasks } from '../context/useTask';
 
 // Mock the context or use the provider
 const TestComponent = () => {
