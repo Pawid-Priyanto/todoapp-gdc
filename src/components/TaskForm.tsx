@@ -28,6 +28,7 @@ const TaskForm: React.FC = () => {
       await addTask(title);
       setTitle('');
     } catch (err) {
+      console.error('Error adding task:', err);
       setValidationError('Failed to add task. Please try again.');
     } finally {
       setIsSubmitting(false);

@@ -61,6 +61,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
         await api.updateTaskStatus(id, !taskToToggle.completed);
       } catch (err) {
         // Rollback on failure
+        console.error('Error updating task status:', err);
         setTasks(originalTasks);
         setError('Failed to update task status.');
       }
@@ -79,6 +80,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
         await api.deleteTaskRequest(id);
       } catch (err) {
         // Rollback
+        console.error('Error deleting task:', err);
         setTasks(originalTasks);
         setError('Failed to delete task.');
       }
